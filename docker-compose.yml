@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+    nodeserver:
+        build:
+            context: ./backend
+        restart: on-failure
+        volumes:
+            - userProfilepictures:/backend/userProfilepictures
+            - userCertificates:/backend/userCertificates/qrCodes
+            - logsData:/backend/logsData
+    frontend:
+        build:
+            context: ./frontend
+        container_name: nginx
+        hostname: nginx
+        # networks:
+        #     - app-network
+        ports:
+            - "80:80"
+volumes:
+    userProfilepictures:
+        external: true
+    userCertificates:
+        external: true
+    logsData:
+        external: true
